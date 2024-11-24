@@ -4,15 +4,15 @@ namespace Command.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class CommandeController : Controller
+public class ProduitController : Controller
 {
     [HttpGet]
-    public ActionResult Index()
+    public string Index()
     {
-        return RedirectToAction("index", "produit");
+        return "All";
     }
     
-    [HttpGet("{id}")]
+    [HttpGet("{id}", Name = "GetProduit")]
     public string Get(int id)
     {
         return "get by id";
