@@ -1,3 +1,4 @@
+using Application;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Command.Controllers;
@@ -9,30 +10,38 @@ public class CommandeController : Controller
     [HttpGet]
     public ActionResult Index()
     {
-        return RedirectToAction("index", "produit");
+        var commandeService = new CommandeService();
+        return Ok(commandeService.GetAll());
     }
     
     [HttpGet("{id}")]
-    public string Get(int id)
+    public ActionResult Get(int id)
     {
-        return "get by id";
+        var commandeService = new CommandeService();
+        return Ok(commandeService.GetById(id));
     }
     
     [HttpPost]
-    public string Post()
+    public ActionResult Post(Commande commande)
     {
-        return "Create";
+        var commandeService = new CommandeService();
+        commandeService.Add(commande);
+        return Ok("Created");
     }
     
     [HttpPut("{id}")]
-    public string Put(int id)
+    public ActionResult Put(int id, Commande commande)
     {
-        return "Update";
+        var commandeService = new CommandeService();
+        commandeService.Update(id, commande);
+        return Ok("Update");
     }
     
     [HttpDelete("{id}")]
-    public string Delete(int id)
+    public ActionResult Delete(int id)
     {
-        return "Delete";
+        var commandeService = new CommandeService();
+        commandeService.Delete(id);
+        return Ok("Delete");
     }
 }
