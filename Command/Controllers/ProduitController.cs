@@ -11,30 +11,33 @@ public class ProduitController : Controller
     [HttpGet]
     public ActionResult Index()
     {
-        
+        return Ok(produitService.GetAll());
     }
     
     [HttpGet("{id}", Name = "GetProduit")]
-    public string Get(int id)
+    public ActionResult Get(int id)
     {
-        return "get by id";
+        return Ok(produitService.GetById(id));
     }
     
     [HttpPost]
-    public string Post()
+    public ActionResult Post([FromBody] Produit produit)
     {
-        return "Create";
+        produitService.Add(produit);
+        return CreatedAtRoute("GetProduit", new { id = produit.Id }, produit);
     }
     
     [HttpPut("{id}")]
-    public string Put(int id)
+    public ActionResult Put(int id, [FromBody] Produit produit)
     {
-        return "Update";
+        produitService.Update(id, produit);
+        return Ok(produit);
     }
     
     [HttpDelete("{id}")]
-    public string Delete(int id)
+    public ActionResult Delete(int id)
     {
-        return "Delete";
+        produitService.Delete(id);
+        return Ok("Deleted");
     }
 }
