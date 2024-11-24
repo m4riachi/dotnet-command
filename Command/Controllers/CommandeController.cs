@@ -7,32 +7,30 @@ namespace Command.Controllers;
 [Route("api/[controller]")]
 public class CommandeController : Controller
 {
+    private CommandeService commandeService = new CommandeService();
+        
     [HttpGet]
     public ActionResult Index()
     {
-        var commandeService = new CommandeService();
         return Ok(commandeService.GetAll());
     }
     
     [HttpGet("{id}")]
     public ActionResult Get(int id)
     {
-        var commandeService = new CommandeService();
         return Ok(commandeService.GetById(id));
     }
     
     [HttpPost]
-    public ActionResult Post(Commande commande)
+    public ActionResult Post([FromBody] Commande commande)
     {
-        var commandeService = new CommandeService();
         commandeService.Add(commande);
         return Ok("Created");
     }
     
     [HttpPut("{id}")]
-    public ActionResult Put(int id, Commande commande)
+    public ActionResult Put(int id, [FromBody] Commande commande)
     {
-        var commandeService = new CommandeService();
         commandeService.Update(id, commande);
         return Ok("Update");
     }
@@ -40,7 +38,6 @@ public class CommandeController : Controller
     [HttpDelete("{id}")]
     public ActionResult Delete(int id)
     {
-        var commandeService = new CommandeService();
         commandeService.Delete(id);
         return Ok("Delete");
     }

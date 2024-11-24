@@ -1,3 +1,4 @@
+using Application;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Command.Controllers;
@@ -6,10 +7,11 @@ namespace Command.Controllers;
 [Route("api/[controller]")]
 public class ProduitController : Controller
 {
+    ProduitService produitService = new ProduitService();
     [HttpGet]
-    public string Index()
+    public ActionResult Index()
     {
-        return "All";
+        
     }
     
     [HttpGet("{id}", Name = "GetProduit")]
